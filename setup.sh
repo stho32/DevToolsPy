@@ -10,3 +10,5 @@ echo "export PATH=\"\$PATH:$(pwd)/source\"" >> ~/.bashrc
 
 cd ..
 
+## we need pip for certain operations
+sudo apt install python3-pip
