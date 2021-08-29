@@ -8,8 +8,5 @@ cd DevToolsPy
 ## copy the export line to bashrc for global use!
 echo "export PATH=\"\$PATH:$(pwd)/source\"" >> ~/.bashrc
 
-## activate at once
-export PATH="$PATH:$(pwd)/source"
-
 cd ..
 
