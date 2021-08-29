@@ -14,7 +14,6 @@ Development tools in python
 
 ```
 wget -q -O - https://raw.githubusercontent.com/stho32/DevToolsPy/main/setup.sh | bash
-
 ```
 
 ## Tools
