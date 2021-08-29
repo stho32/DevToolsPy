@@ -3,9 +3,8 @@
 ## clone the repo
 git clone https://github.com/stho32/DevToolsPy
 
-## get the current directory
-sourcedir = $(pwd)
+cd DevToolsPy
 
 ## copy the export line to bashrc for global use!
-echo "export PATH=\"\$PATH:$sourcedir/DevToolsPy/source\"" >> $sourcedir/.bashrc
+echo "export PATH=\"\$PATH:$(pwd)/source\"" >> ~/.bashrc
 
