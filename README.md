@@ -25,3 +25,5 @@ The command goes through all directories in the current folder, enters them and 
 Perfect to update a big bunch of project repositories that you might have cloned during your busy open source work.
 
 After that you are up and running for a new contribution and will not be surprised by other peoples contributions.
+
+![git-pull-all](./docs/git-pull-all.png)
