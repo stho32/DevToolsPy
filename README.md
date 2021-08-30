@@ -26,4 +26,4 @@ Perfect to update a big bunch of project repositories that you might have cloned
 
 After that you are up and running for a new contribution and will not be surprised by other peoples contributions.
 
-![git-pull-all](./docs/git-pull-all.png)
+![git-pull-all](docs/git-pull-all.png)
