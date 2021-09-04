@@ -1,7 +1,6 @@
 #!/bin/python3
 import os
 import subprocess
-from prettytable import PrettyTable
 
 def check_has_readme():
     if not os.path.isfile("README.md"):
@@ -21,7 +20,6 @@ def get_subdirectories():
     return directories
 
 def perform_qa_on(directory):
-    print("   - performing qa on " + directory + "...")
     result = []
     
     os.chdir(directory)
@@ -33,19 +31,15 @@ def perform_qa_on(directory):
     return result;
 
 def perform_qa():
-    table = PrettyTable(['Nr.', 'Repo', 'Status'])
-    
-    number = 0
     directories = get_subdirectories() 
 
     for directory in directories:
-        number += 1
         result = perform_qa_on(directory)
-        table.add_row([number, directory, " ".join(result)])
-
-    table.align = "l"
-
-    print(table)
+        if len(result) > 0:
+            print(directory + ":")
+            for message in result:
+                print("  - " + message)
+            exit()
 
 if __name__ == "__main__":
     perform_qa()
