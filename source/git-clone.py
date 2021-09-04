@@ -9,8 +9,8 @@ def simplify_message(message):
     return message
 
 
-def get_github_repos(username):
-    response = requests.get("https://api.github.com/users/" + username + "/repos?per_page=1000")
+def get_github_repos(username, page):
+    response = requests.get("https://api.github.com/users/" + username + "/repos?page=" + str(page))
     parsed = json.loads(response.content.decode('utf-8'))
     return parsed
 
@@ -21,10 +21,18 @@ def git_clone(username):
         if not os.path.isfile(f):
             already_available.append(f)
     
-    repositories = get_github_repos(username)
-    for repository in repositories:
-        if not repository["name"] in already_available:
-            os.system("git clone " + repository["clone_url"])
+    page = 1
+    repositories = [""]
+    
+    while (len(repositories) > 0) :
+        repositories = get_github_repos(username, page)
+        for repository in repositories:
+            if repository["name"] in already_available:
+                print ("  - " + repository["name"] + " is already here...")
+            else:
+                print ("  - " + repository["name"] + " cloning...")
+                os.system("git clone " + repository["clone_url"])
+        page += 1
 
 if __name__ == "__main__":
     git_clone("stho32")

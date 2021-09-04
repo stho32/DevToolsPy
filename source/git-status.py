@@ -9,15 +9,18 @@ def simplify_message(message):
     return "unclean"
 
 def git_status():
-    t = PrettyTable(['Repo', 'Status'])
+    t = PrettyTable(['Nr.', 'Repo', 'Status'])
+
+    number = 0
 
     for f in os.listdir("."):
         if not os.path.isfile(f):
+            number += 1
             os.chdir(f)
             proc = subprocess.Popen(["git", "status"], stdout=subprocess.PIPE)
             (out, err) = proc.communicate()
             out = simplify_message(out.decode("utf-8"))
-            t.add_row([f, out])
+            t.add_row([number, f, out])
             os.chdir("..")
 
     t.align = "l"
