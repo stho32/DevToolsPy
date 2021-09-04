@@ -12,16 +12,22 @@ def git_status():
     t = PrettyTable(['Nr.', 'Repo', 'Status'])
 
     number = 0
+    directories = []
 
     for f in os.listdir("."):
         if not os.path.isfile(f):
-            number += 1
-            os.chdir(f)
-            proc = subprocess.Popen(["git", "status"], stdout=subprocess.PIPE)
-            (out, err) = proc.communicate()
-            out = simplify_message(out.decode("utf-8"))
-            t.add_row([number, f, out])
-            os.chdir("..")
+            directories.append(f)
+
+    directories = sorted(directories)
+
+    for directory in directories:
+        number += 1
+        os.chdir(directory)
+        proc = subprocess.Popen(["git", "status"], stdout=subprocess.PIPE)
+        (out, err) = proc.communicate()
+        out = simplify_message(out.decode("utf-8"))
+        t.add_row([number, directory, out])
+        os.chdir("..")
 
     t.align = "l"
     print(t)

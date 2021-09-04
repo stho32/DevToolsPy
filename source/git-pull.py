@@ -21,6 +21,8 @@ def pull_all_repos():
 
     for f in os.listdir("."):
         if not os.path.isfile(f):
+            print("  - pulling updates for " + f)
+
             os.chdir(f)
             proc = subprocess.Popen(["git", "pull"], stdout=subprocess.PIPE)
             (out, err) = proc.communicate()
