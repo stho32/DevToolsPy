@@ -2,6 +2,7 @@
 import os
 import json
 import requests
+import argparse
 
 
 def simplify_message(message):
@@ -14,7 +15,7 @@ def get_github_repos(username, page):
     return parsed
 
 
-def git_clone(username):
+def git_clone(username, startswith):
     already_available = []
 
     for f in os.listdir("."):
@@ -27,13 +28,20 @@ def git_clone(username):
     while len(repositories) > 0:
         repositories = get_github_repos(username, page)
         for repository in repositories:
-            if repository["name"] in already_available:
-                print("  - " + repository["name"] + " is already here...")
-            else:
-                print("  - " + repository["name"] + " cloning...")
-                os.system("git clone " + repository["clone_url"])
+            if (len(startswith) > 0) and (startswith in repository["name"]):
+                if repository["name"] in already_available:
+                    print("  - " + repository["name"] + " is already here...")
+                else:
+                    print("  - " + repository["name"] + " cloning...")
+                    os.system("git clone " + repository["clone_url"])
         page += 1
 
 
 if __name__ == "__main__":
-    git_clone("stho32")
+    parser = argparse.ArgumentParser(description='Clone from github repository')
+    parser.add_argument('account', type=str, help='which github account is the root of the request')
+    parser.add_argument('startswith', type=str, help='a string that the repositories that are cloned start with')
+    args = parser.parse_args()
+
+    if len(args.account):
+        git_clone(args.account, args.startswith)
