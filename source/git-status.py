@@ -3,10 +3,12 @@ import os
 import subprocess
 from prettytable import PrettyTable
 
+
 def simplify_message(message):
     if "unverändert" in message:
         return "CLEAR"
     return "unclean"
+
 
 def git_status():
     t = PrettyTable(['Nr.', 'Repo', 'Status'])
@@ -31,6 +33,7 @@ def git_status():
 
     t.align = "l"
     print(t)
+
 
 if __name__ == "__main__":
     git_status()
