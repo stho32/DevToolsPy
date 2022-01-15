@@ -34,7 +34,7 @@ def git_status(doIt):
         os.chdir("..")
         
         if out == "CLEAR":
-            if not directory.lower().startswith("devtools"):
+            if not directory.lower().startswith("devtools") and not directory.tolower().startswith("project"):
                 action = "Remove"
                 if doIt:
                     print(fulldir)
